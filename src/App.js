@@ -1,8 +1,11 @@
+import { Fragment } from "react";
+import Form from "./components/Form";
+
 function App() {
   return (
-    <div className="App">
-      <h1>app musica</h1>
-    </div>
+    <>
+      <Form />
+    </>
   );
 }
 
