@@ -1,9 +1,43 @@
-const Form = () => {
+import { useState } from "react";
+import Error from "./Error";
+
+const Form = ({ setSearchLyric }) => {
+  //
+  const [search, setSearch] = useState({
+    artist: "",
+    song: "",
+  });
+  const [error, setError] = useState(false);
+
+  const { artist, song } = search;
+
+  //Function for each input to save the content
+  const updateState = (e) => {
+    setSearch({
+      ...search,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  //validate & save the terms for the search
+  const searchSong = (e) => {
+    e.preventDefault();
+    if (artist.trim() === "" || song.trim() === "") {
+      setError(true);
+      return;
+    }
+    setError(false);
+    setSearchLyric(search);
+  };
+
   return (
     <div className="bg-info">
       <div className="container">
         <div className="row">
-          <form className="col card text-white bg-transparent mb-5 pt-5 pb-2">
+          <form
+            className="col card text-white bg-transparent mb-5 pt-5 pb-2"
+            onSubmit={searchSong}
+          >
             <fieldset>
               <legend className="text-center">Buscador Letras Canciones</legend>
 
@@ -15,7 +49,9 @@ const Form = () => {
                       type="text"
                       className="form-control"
                       placeholder="Nombre del Artista"
-                      name="artista"
+                      name="artist"
+                      onChange={updateState}
+                      value={artist}
                     ></input>
                   </div>
                 </div>
@@ -26,7 +62,9 @@ const Form = () => {
                       type="text"
                       className="form-control"
                       placeholder="Nombre de la Canción"
-                      name="cancion"
+                      name="song"
+                      onChange={updateState}
+                      value={song}
                     ></input>
                   </div>
                 </div>
@@ -38,6 +76,7 @@ const Form = () => {
             </fieldset>
           </form>
         </div>
+        {error ? <Error message="Todos los Campos son Obligatorios" /> : null}
       </div>
     </div>
   );
