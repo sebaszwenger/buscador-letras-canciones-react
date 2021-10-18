@@ -5,10 +5,12 @@ import Song from "./components/Song";
 import Band from "./components/Band";
 
 function App() {
+  //Satates
   const [searchLyric, setSearchLyric] = useState({});
   const [lyric, setLyric] = useState("");
   const [band, setBand] = useState({});
 
+  //Call APIs
   useEffect(() => {
     //avoid first call with empty search term
     if (Object.keys(searchLyric).length === 0) return;
