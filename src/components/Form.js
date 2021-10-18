@@ -1,17 +1,17 @@
 import { useState } from "react";
 import Error from "./Error";
+import PropTypes from "prop-types";
 
 const Form = ({ setSearchLyric }) => {
-  //
+  //States
   const [search, setSearch] = useState({
     artist: "",
     song: "",
   });
   const [error, setError] = useState(false);
-
   const { artist, song } = search;
 
-  //Function for each input to save the content
+  //Function that save the content for each input
   const updateState = (e) => {
     setSearch({
       ...search,
@@ -80,6 +80,10 @@ const Form = ({ setSearchLyric }) => {
       </div>
     </div>
   );
+};
+
+Form.propTypes = {
+  setSearchLyric: PropTypes.func.isRequired,
 };
 
 export default Form;
